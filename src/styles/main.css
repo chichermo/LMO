@@ -209,17 +209,21 @@ p {
   gap: 0.15rem;
 }
 
-.nav a {
+.nav a,
+.nav button {
   font-family: var(--mono);
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   padding: 0.55rem 0.8rem;
   border: 1px solid transparent;
+  background: transparent;
+  appearance: none;
 }
 
 .nav a[aria-current="page"],
-.nav a:hover {
+.nav a:hover,
+.nav button:hover {
   border-color: var(--line-strong);
   background: var(--sheet);
 }
@@ -320,12 +324,73 @@ p {
   padding: 0 var(--gutter) 4.5rem;
 }
 
+.hero-brand {
+  padding: 1.6rem 0 0.4rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.masthead {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.6rem 1.5rem;
+  align-items: end;
+  padding-bottom: 1.3rem;
+}
+
+.masthead-mark {
+  width: clamp(4.6rem, 11vw, 8.6rem);
+  transform-origin: 50% 80%;
+}
+
+.masthead-mark svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.masthead-copy {
+  min-width: 0;
+}
+
+.mast-title {
+  font-family: var(--display);
+  font-size: clamp(4.2rem, 13vw, 10.4rem);
+  font-weight: 800;
+  line-height: 0.78;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  margin: 0.15rem 0 0.35rem;
+  overflow: hidden;
+}
+
+.mast-title em {
+  font-style: normal;
+  color: var(--carmine);
+}
+
+.mast-title [data-char] {
+  display: inline-block;
+}
+
+.mast-sub {
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 2.8vw, 2.15rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--ink-soft);
+  padding-bottom: 0.55rem;
+  border-bottom: 3px solid var(--carmine);
+  max-width: 22ch;
+}
+
 .hero {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   gap: 2.5rem;
   align-items: end;
-  padding: 2.4rem 0 2.8rem;
+  padding: 2rem 0 2.8rem;
   border-bottom: 1px solid var(--line);
 }
 
@@ -347,25 +412,9 @@ p {
   background: var(--carmine);
 }
 
-.hero h1 {
-  font-family: var(--display);
-  font-size: clamp(3.4rem, 9.4vw, 8.4rem);
-  font-weight: 800;
-  line-height: 0.8;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
-  margin: 0.55rem 0 1rem;
-  max-width: 11ch;
-}
-
 .hero h1 em {
   font-style: normal;
   color: var(--carmine);
-}
-
-.hero h1 [data-word] {
-  display: inline-block;
-  vertical-align: baseline;
 }
 
 .lede {
@@ -779,6 +828,20 @@ p {
   margin: 0.2rem 0;
 }
 
+.site-footer button {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.site-footer button:hover {
+  color: var(--carmine);
+}
+
 .legal {
   margin-top: 1.6rem;
   padding-top: 0.9rem;
@@ -1137,6 +1200,7 @@ p {
   }
 
   .hero,
+  .masthead,
   .pillars,
   .detail,
   .two-col,

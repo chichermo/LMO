@@ -15,6 +15,7 @@ export const SITE = {
 }
 
 export const NAV = [
+  { href: '/', label: 'Home', match: 'home' },
   { href: '/productos.html', label: 'Catálogo', match: 'productos' },
   { href: '/empresa.html', label: 'Empresa', match: 'empresa' },
   { href: '/contacto.html', label: 'Contacto', match: 'contacto' },

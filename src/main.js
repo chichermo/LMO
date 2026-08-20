@@ -18,7 +18,8 @@ function header() {
         </span>
       </a>
       <nav class="nav" data-nav>
-        ${NAV.map((item) => `<a href="${item.href}" ${page.includes(item.match) ? 'aria-current="page"' : ''}>${item.label}</a>`).join('')}
+        ${NAV.map((item) => `<a href="${item.href}" ${page === item.match || page.includes(item.match) && item.match !== 'home' ? 'aria-current="page"' : ''}>${item.label}</a>`).join('')}
+        <button type="button" data-back>Regresar</button>
       </nav>
       <div class="header-cta">
         <a class="btn btn-red" href="/cotizar.html">Cotizar <span class="quote-count" data-count>00</span></a>
@@ -49,8 +50,11 @@ function footer() {
           </ul>
         </div>
         <div>
-          <h3>Empresa</h3>
+          <h3>Menú</h3>
           <ul>
+            <li><a href="/">Home</a></li>
+            <li><button type="button" class="linkish" data-back>Regresar</button></li>
+            <li><a href="/productos.html">Catálogo</a></li>
             <li><a href="/empresa.html">Quiénes somos</a></li>
             <li><a href="/contacto.html">Contacto</a></li>
             <li><a href="/cotizar.html">Solicitar cotización</a></li>
@@ -111,6 +115,12 @@ export function mountChrome() {
   const nav = document.querySelector('[data-nav]')
   document.querySelector('[data-toggle]')?.addEventListener('click', () => {
     nav?.classList.toggle('open')
+  })
+  document.querySelectorAll('[data-back]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (window.history.length > 1) window.history.back()
+      else window.location.href = '/'
+    })
   })
 
   window.addEventListener('lmo:quote', syncCount)

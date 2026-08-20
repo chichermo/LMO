@@ -117,36 +117,81 @@ export function revealOnScroll(selector) {
 }
 
 function heroMotion() {
-  const title = document.querySelector('.hero h1')
+  const title = document.querySelector('[data-mast-title]')
+  const mark = document.querySelector('[data-mast-mark]')
   const plate = document.querySelector('.drawing-plate svg')
   const plotter = document.querySelector('[data-plotter]')
   if (!title) return
 
   if (reduced) {
+    const fill = mark?.querySelector('path[fill]')
+    if (fill) fill.setAttribute('fill-opacity', '1')
     if (plate) drawSvg(plate, { duration: 0 })
     return
   }
 
-  const split = splitText(title, { words: true, chars: false })
-  utils.set(split.words, { y: 36, opacity: 0 })
-  utils.set('.hero .kicker, .hero .lede, .hero-actions, .hero-meta, .drawing-label', { opacity: 0, y: 16 })
+  const split = splitText(title, { chars: true, words: false })
+  utils.set(split.chars, { y: '1.15em', opacity: 0 })
+  utils.set('[data-mast-sub], .hero-brand .kicker, .hero .lede, .hero-actions, .hero-meta, .drawing-label', {
+    opacity: 0,
+    y: 18,
+  })
+  if (mark) utils.set(mark, { scale: 0.72, rotate: -18, opacity: 0 })
 
   const tl = createTimeline({ defaults: { ease: 'outExpo' } })
-  tl.add('.hero .kicker', { opacity: 1, y: 0, duration: 500 }, 0)
+  if (mark) {
+    tl.add(mark, { opacity: 1, scale: 1, rotate: 0, duration: 980 }, 0)
+    drawSvg(mark.querySelector('svg'), { delay: 80, duration: 1500, step: 90 })
+    const fill = mark.querySelector('path[fill]')
+    if (fill) {
+      animate(fill, {
+        fillOpacity: [0, 1],
+        duration: 700,
+        delay: 720,
+        ease: 'outQuad',
+      })
+    }
+  }
+  tl.add('.hero-brand .kicker', { opacity: 1, y: 0, duration: 480 }, 120)
   tl.add(
-    split.words,
+    split.chars,
     {
-      opacity: 1,
       y: 0,
-      duration: 780,
-      delay: stagger(55),
+      opacity: 1,
+      duration: 760,
+      delay: stagger(28, { from: 'center' }),
     },
-    80
+    220
   )
-  tl.add('.hero .lede, .hero-actions, .hero-meta', { opacity: 1, y: 0, duration: 620, delay: stagger(90) }, 420)
-  tl.add('.drawing-label', { opacity: 1, y: 0, duration: 500 }, 280)
+  tl.add('[data-mast-sub]', { opacity: 1, y: 0, duration: 700 }, 560)
+  tl.add('.hero .lede, .hero-actions, .hero-meta', { opacity: 1, y: 0, duration: 620, delay: stagger(90) }, 640)
+  tl.add('.drawing-label', { opacity: 1, y: 0, duration: 500 }, 480)
 
-  if (plate) drawSvg(plate, { delay: 180, duration: 1400, step: 38 })
+  if (plate) drawSvg(plate, { delay: 280, duration: 1400, step: 38 })
+
+  if (mark) {
+    animate(mark, {
+      rotate: [0, 3.5, 0, -2.5, 0],
+      duration: 7200,
+      ease: 'inOutSine',
+      loop: true,
+      delay: 1800,
+    })
+    const red = mark.querySelector('.js-draw-red')
+    if (red) {
+      try {
+        animate(createDrawable(red), {
+          draw: ['0 0', '0 1', '1 1', '0 1'],
+          duration: 2800,
+          ease: 'inOut(3)',
+          loop: true,
+          delay: 1600,
+        })
+      } catch {
+        /* keep static underline */
+      }
+    }
+  }
 
   if (plotter) {
     createTimeline({ loop: true, defaults: { ease: 'inOutSine', duration: 1600 } })
