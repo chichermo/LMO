@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 96" fill="none" role="img" aria-labelledby="lmoTitle">
+  <title id="lmoTitle">LMO INOX SPA</title>
+  <defs>
+    <linearGradient id="steelL" x1="8" y1="4" x2="72" y2="92" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F4F1EA"/>
+      <stop offset=".38" stop-color="#9A9A96"/>
+      <stop offset=".5" stop-color="#E7E4DC"/>
+      <stop offset=".72" stop-color="#6E6E6A"/>
+      <stop offset="1" stop-color="#D8D5CC"/>
+    </linearGradient>
+  </defs>
+  <path d="M10 6h28v62h38v22H10V6Z" fill="url(#steelL)"/>
+  <circle cx="24" cy="22" r="5.2" fill="#0C0D10"/>
+  <circle cx="24" cy="40" r="5.2" fill="#0C0D10"/>
+  <circle cx="24" cy="58" r="5.2" fill="#0C0D10"/>
+  <rect x="10" y="92" width="66" height="2.4" fill="#D3122A"/>
+  <text x="96" y="62" fill="#F4F1EA" font-family="Arial Narrow, Arial, sans-serif" font-size="52" font-weight="800" letter-spacing="-1.5">LMO INOX</text>
+  <text x="352" y="36" fill="#D3122A" font-family="Arial Narrow, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="4">SPA</text>
+</svg>

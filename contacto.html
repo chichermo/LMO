@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contacto · LMO INOX SPA</title>
+    <meta name="description" content="Contacto comercial LMO INOX SPA. Cotizaciones de materiales de acero." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  </head>
+  <body data-page="contacto">
+    <div class="frame" data-app>
+      <main class="main" id="contenido">
+        <header class="page-intro">
+          <p class="kicker"><span class="rule"></span> Mesa de ventas</p>
+          <h1>Escríbanos la lista.</h1>
+        </header>
+
+        <div class="two-col">
+          <form class="form-grid" action="mailto:ventas@lmoinox.cl" method="get" enctype="text/plain">
+            <input type="hidden" name="subject" value="Contacto LMO INOX SPA" />
+            <label class="field">
+              <span>Nombre</span>
+              <input name="nombre" required />
+            </label>
+            <label class="field">
+              <span>Empresa</span>
+              <input name="empresa" required />
+            </label>
+            <label class="field">
+              <span>Email</span>
+              <input name="email" type="email" required />
+            </label>
+            <label class="field">
+              <span>Teléfono</span>
+              <input name="telefono" required />
+            </label>
+            <label class="field full">
+              <span>Mensaje</span>
+              <textarea name="body" required placeholder="Material, norma, diámetro, cantidad, fecha."></textarea>
+            </label>
+            <div class="full hero-actions">
+              <button class="btn btn-red" type="submit">Enviar</button>
+              <a class="btn" href="/cotizar.html">Ir a cotizar con lista</a>
+            </div>
+          </form>
+          <aside class="facts">
+            <div><span class="k">Correo</span><span>ventas@lmoinox.cl</span></div>
+            <div><span class="k">Teléfono</span><span>+56 9 0000 0000</span></div>
+            <div><span class="k">Ciudad</span><span>Santiago, Chile</span></div>
+            <div><span class="k">Horario</span><span>Lunes a viernes · 08:30 – 18:00</span></div>
+            <div><span class="k">RUT</span><span>78.487.968-2</span></div>
+            <div><span class="k">Despacho</span><span>Todo Chile · retiro coordinado</span></div>
+          </aside>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

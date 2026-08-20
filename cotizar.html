@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cotizar · LMO INOX SPA</title>
+    <meta name="description" content="Solicite cotización de materiales de acero a LMO INOX SPA." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  </head>
+  <body data-page="cotizar">
+    <div class="frame" data-app>
+      <main class="main" id="contenido">
+        <header class="page-intro">
+          <p class="kicker"><span class="rule"></span> Mesa de ventas</p>
+          <h1>Una lista. Un plazo. Un precio.</h1>
+          <p class="lede" style="margin-top:0.8rem">Agregue ítems desde el catálogo o descríbalos aquí. Respondemos por correo o WhatsApp con disponibilidad y certificado.</p>
+        </header>
+
+        <section class="section" style="padding-top:1.4rem">
+          <div class="section-head">
+            <span class="idx">Ítems</span>
+            <h2>Su cotización</h2>
+            <button class="btn btn-ghost" type="button" data-clear>Vaciar lista</button>
+          </div>
+          <div class="quote-list" data-quote-list></div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <span class="idx">Datos</span>
+            <h2>Quién recibe la oferta.</h2>
+          </div>
+          <div class="notice">Reemplace el teléfono y el correo de LMO INOX cuando tenga los definitivos. Mientras tanto el envío abre su cliente de mail o WhatsApp.</div>
+          <form class="form-grid" data-quote-form>
+            <label class="field">
+              <span>Empresa</span>
+              <input name="empresa" required placeholder="Razón social" />
+            </label>
+            <label class="field">
+              <span>RUT empresa</span>
+              <input name="rut" required placeholder="12.345.678-9" />
+            </label>
+            <label class="field">
+              <span>Nombre de contacto</span>
+              <input name="contacto" required />
+            </label>
+            <label class="field">
+              <span>Email</span>
+              <input name="email" type="email" required />
+            </label>
+            <label class="field">
+              <span>Teléfono</span>
+              <input name="telefono" required placeholder="+56 9 …" />
+            </label>
+            <label class="field">
+              <span>Ciudad / faena</span>
+              <input name="ciudad" required />
+            </label>
+            <label class="field full">
+              <span>Notas técnicas</span>
+              <textarea name="notas" placeholder="Norma, schedule, cara RF, cantidad, fecha de faena…"></textarea>
+            </label>
+            <div class="full hero-actions">
+              <button class="btn btn-red" type="submit">Enviar por correo</button>
+              <a class="btn" data-wa href="#" target="_blank" rel="noreferrer">Abrir WhatsApp</a>
+            </div>
+          </form>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/src/quote-page.js"></script>
+  </body>
+</html>
