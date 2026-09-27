@@ -7,13 +7,13 @@ on:
 
 concurrency:
   group: deploy-production
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy:
     name: Build y FTP
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -21,7 +21,7 @@ jobs:
       - name: Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
 
       - name: Instalar dependencias
@@ -31,21 +31,26 @@ jobs:
         run: npm run build
 
       - name: Subir dist/ a public_html
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: Wandalen/wretry.action@v3.5.0
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
-          port: 21
-          local-dir: ./dist/
-          server-dir: public_html/
-          timeout: 60000
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/.github/**
-            **/.well-known/**
-            **/cgi-bin/**
-            **/mail/**
-            **/tmp/**
+          attempt_limit: 3
+          attempt_delay: 20000
+          action: SamKirkland/FTP-Deploy-Action@v4.3.5
+          with: |
+            server: ${{ secrets.FTP_SERVER }}
+            username: ${{ secrets.FTP_USERNAME }}
+            password: ${{ secrets.FTP_PASSWORD }}
+            protocol: ftp
+            port: 21
+            local-dir: ./dist/
+            server-dir: public_html/
+            timeout: 300000
+            log-level: verbose
+            exclude: |
+              **/.git*
+              **/.git*/**
+              **/.github/**
+              **/.well-known/**
+              **/cgi-bin/**
+              **/mail/**
+              **/tmp/**
