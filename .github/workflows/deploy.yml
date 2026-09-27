@@ -1,5 +1,13 @@
 name: Publicar en lmoinox.cl
 
+# Nota: Host.cl suele bloquear FTP desde IPs de GitHub Actions (ETIMEDOUT :21).
+# Si este workflow falla, desplegar desde el PC:
+#   $env:FTP_SERVER="ftp.lmoinox.cl"
+#   $env:FTP_USERNAME="..."
+#   $env:FTP_PASSWORD="..."
+#   npm run deploy
+# O subir lmo-web.zip a public_html en cPanel.
+
 on:
   push:
     branches: [main]
@@ -34,7 +42,7 @@ jobs:
         uses: Wandalen/wretry.action@v3.5.0
         with:
           attempt_limit: 3
-          attempt_delay: 20000
+          attempt_delay: 30000
           action: SamKirkland/FTP-Deploy-Action@v4.3.5
           with: |
             server: ${{ secrets.FTP_SERVER }}
