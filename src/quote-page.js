@@ -1,6 +1,6 @@
-import { SITE } from './data/site.js'
 import { getQuote, updateQty, removeItem, clearQuote, quoteText } from './quote.js'
-import { whatsappUrl, toast } from './main.js'
+import { openWhatsAppPicker, toast } from './main.js'
+import { bindMailForm } from './mail.js'
 import { staggerIn } from './motion.js'
 
 const list = document.querySelector('[data-quote-list]')
@@ -11,7 +11,7 @@ function render() {
   const items = getQuote()
   if (!list) return
   if (!items.length) {
-    list.innerHTML = `<div class="empty">Aún no hay ítems. Agregue productos desde el <a href="/productos.html">catálogo</a> o descríbalos en el mensaje.</div>`
+    list.innerHTML = `<div class="empty">Aún no hay ítems. Agregue productos desde el <a href="productos.html">catálogo</a> o descríbalos en el mensaje.</div>`
     return
   }
   list.innerHTML = items
@@ -50,31 +50,36 @@ document.querySelector('[data-clear]')?.addEventListener('click', () => {
 
 function payload(formEl) {
   const data = Object.fromEntries(new FormData(formEl))
-  return `Cotización LMO INOX SPA
-Empresa: ${data.empresa}
-RUT: ${data.rut}
-Contacto: ${data.contacto}
-Email: ${data.email}
-Teléfono: ${data.telefono}
-Ciudad: ${data.ciudad}
-
-${quoteText()}
-
-Notas: ${data.notas || '—'}
-`
+  return {
+    tipo: 'cotizacion',
+    nombre: data.contacto,
+    empresa: data.empresa,
+    rut: data.rut,
+    email: data.email,
+    telefono: data.telefono,
+    ciudad: data.ciudad,
+    mensaje: `${quoteText()}\n\nNotas: ${data.notas || '—'}`,
+    website: data.website,
+  }
 }
 
-form?.addEventListener('submit', (e) => {
-  e.preventDefault()
-  const body = payload(form)
-  const mailto = `mailto:${SITE.email}?subject=${encodeURIComponent('Cotización LMO INOX')}&body=${encodeURIComponent(body)}`
-  window.location.href = mailto
-  toast('Abriendo su cliente de correo')
+const ok = document.querySelector('[data-form-ok]')
+
+bindMailForm(form, {
+  buildPayload: payload,
+  onSuccess: () => {
+    clearQuote()
+    render()
+    form?.reset()
+    form?.setAttribute('hidden', '')
+    ok?.removeAttribute('hidden')
+    toast('Enviado a ventas@lmoinox.cl')
+  },
 })
 
-if (wa) wa.href = whatsappUrl()
-window.addEventListener('lmo:quote', () => {
-  if (wa) wa.href = whatsappUrl()
+wa?.addEventListener('click', (event) => {
+  event.preventDefault()
+  openWhatsAppPicker()
 })
 
 render()

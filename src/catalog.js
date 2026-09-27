@@ -4,6 +4,13 @@ import { addToQuote } from './quote.js'
 import { toast } from './main.js'
 import { bindPlateHover, drawSvg, punch, staggerIn, staggerOut } from './motion.js'
 
+function vizMarkup(p) {
+  if (p.image) {
+    return `<div class="product-viz has-photo"><img src="${p.image}" alt="${p.name}" loading="lazy" decoding="async" /></div>`
+  }
+  return `<div class="product-viz">${drawingFor(p.category, p.material)}</div>`
+}
+
 const params = new URLSearchParams(location.search)
 const q = document.querySelector('[name="q"]')
 const cat = document.querySelector('[name="cat"]')
@@ -27,7 +34,7 @@ let firstPaint = true
 function plateMarkup(p) {
   return `
     <article class="product-plate">
-      <div class="product-viz">${drawingFor(p.category, p.material)}</div>
+      ${vizMarkup(p)}
       <div class="product-body">
         <h3>${p.name}</h3>
         <p>${p.summary}</p>
@@ -36,7 +43,7 @@ function plateMarkup(p) {
           <i>${p.sizes}</i>
         </div>
         <div class="plate-actions">
-          <a class="btn" href="/producto.html?id=${p.id}">Ficha</a>
+          <a class="btn" href="producto.html?id=${p.id}">Ficha</a>
           <button class="btn btn-red" type="button" data-add="${p.id}">Añadir a cotización</button>
         </div>
       </div>
@@ -54,7 +61,8 @@ function paint(list) {
   staggerIn(plates, { from: firstPaint ? 'center' : 'first' })
   plates.forEach((plate) => {
     bindPlateHover(plate)
-    drawSvg(plate.querySelector('svg'), { duration: 980, step: 22 })
+    const svg = plate.querySelector('svg')
+    if (svg) drawSvg(svg, { duration: 980, step: 22 })
   })
   firstPaint = false
 }

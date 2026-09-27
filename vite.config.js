@@ -6,6 +6,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
   root: '.',
+  base: './',
   publicDir: 'public',
   server: {
     port: 5173,

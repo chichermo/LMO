@@ -1,3 +1,8 @@
 node_modules
 dist
 .DS_Store
+lmo-web.zip
+marca-facturas/node_modules
+marca-facturas/package-lock.json
+assets-fuente
+

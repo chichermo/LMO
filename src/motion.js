@@ -120,6 +120,7 @@ function heroMotion() {
   const title = document.querySelector('[data-mast-title]')
   const mark = document.querySelector('[data-mast-mark]')
   const plate = document.querySelector('.drawing-plate svg')
+  const platePhoto = document.querySelector('.drawing-plate.has-photo img')
   const plotter = document.querySelector('[data-plotter]')
   if (!title) return
 
@@ -137,6 +138,7 @@ function heroMotion() {
     y: 18,
   })
   if (mark) utils.set(mark, { scale: 0.72, rotate: -18, opacity: 0 })
+  if (platePhoto) utils.set(platePhoto, { opacity: 0, scale: 1.06 })
 
   const tl = createTimeline({ defaults: { ease: 'outExpo' } })
   if (mark) {
@@ -151,6 +153,9 @@ function heroMotion() {
         ease: 'outQuad',
       })
     }
+  }
+  if (platePhoto) {
+    tl.add(platePhoto, { opacity: 1, scale: 1, duration: 1100 }, 160)
   }
   tl.add('.hero-brand .kicker', { opacity: 1, y: 0, duration: 480 }, 120)
   tl.add(
@@ -206,7 +211,7 @@ function heroMotion() {
 function chromeMotion() {
   if (reduced) return
   const header = document.querySelector('.site-header')
-  const wa = document.querySelector('.wa')
+  const wa = document.querySelector('.wa-dock')
   const bar = document.querySelector('[data-progress]')
   if (header) {
     utils.set(header, { y: -18, opacity: 0 })

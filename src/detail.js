@@ -11,15 +11,23 @@ const root = document.querySelector('[data-detail]')
 
 if (!product || !root) {
   if (root) {
-    root.innerHTML = `<div class="empty">No encontramos esa ficha. <a href="/productos.html">Volver al catálogo</a>.</div>`
+    root.innerHTML = `<div class="empty">No encontramos esa ficha. <a href="productos.html">Volver al catálogo</a>.</div>`
   }
 } else {
   const cat = getCategory(product.category)
   const mat = MATERIALS.find((m) => m.id === product.material)
   document.title = `${product.name} · LMO INOX SPA`
+  const viz = product.image
+    ? `<div class="detail-viz has-photo">
+        <img src="${product.image}" alt="${product.name}" loading="eager" decoding="async" />
+      </div>`
+    : `<div class="detail-viz">${drawingFor(product.category, product.material)}</div>`
+  const datasheet = product.datasheet
+    ? `<a class="btn" href="${product.datasheet}" target="_blank" rel="noreferrer">Ver ficha técnica</a>`
+    : ''
   root.innerHTML = `
     <div class="detail">
-      <div class="detail-viz">${drawingFor(product.category, product.material)}</div>
+      ${viz}
       <div class="detail-body">
         <p class="kicker"><span class="rule"></span> ${cat?.name || ''} · ${mat?.name || ''}</p>
         <h1>${product.name}</h1>
@@ -33,13 +41,14 @@ if (!product || !root) {
         </table>
         <div class="hero-actions">
           <button class="btn btn-red" type="button" data-add>Añadir a cotización</button>
-          <a class="btn" href="/productos.html?cat=${product.category}">Más de ${cat?.name || 'esta línea'}</a>
+          ${datasheet}
+          <a class="btn" href="productos.html?cat=${product.category}">Más de ${cat?.name || 'esta línea'}</a>
         </div>
       </div>
     </div>
   `
-  const viz = root.querySelector('.detail-viz svg')
-  drawSvg(viz, { duration: 1400, step: 36 })
+  const svg = root.querySelector('.detail-viz svg')
+  if (svg) drawSvg(svg, { duration: 1400, step: 36 })
   if (!reduced) {
     const rows = root.querySelectorAll('.spec-table tr, .detail-body h1, .detail-body .lede, .hero-actions')
     utils.set(rows, { opacity: 0, y: 16 })

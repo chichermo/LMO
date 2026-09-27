@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 98" width="80" height="98">
+  <title>Isotipo LMO INOX SPA</title>
+  <defs>
+  <linearGradient id="steelL" x1="8" y1="4" x2="72" y2="92" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#F7F4EC"/>
+    <stop offset=".32" stop-color="#C9C6BC"/>
+    <stop offset=".5" stop-color="#F2EFE6"/>
+    <stop offset=".7" stop-color="#9A9A94"/>
+    <stop offset="1" stop-color="#E4E1D8"/>
+  </linearGradient>
+  <linearGradient id="steelEdge" x1="0" y1="0" x2="80" y2="0" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#ffffff" stop-opacity=".7"/>
+    <stop offset="1" stop-color="#7A7A76"/>
+  </linearGradient></defs>
+  
+  <path d="M10 6h28v62h38v22H10V6Z" fill="url(#steelL)" stroke="#1A1814" stroke-width="1.35"/>
+  <circle cx="24" cy="22" r="5.2" fill="#0C0D10"/>
+  <circle cx="24" cy="40" r="5.2" fill="#0C0D10"/>
+  <circle cx="24" cy="58" r="5.2" fill="#0C0D10"/>
+  <rect x="10" y="92" width="66" height="2.6" fill="#D3122A"/>
+</svg>
