@@ -83,10 +83,10 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 
 $label = $tipo === 'cotizacion' ? 'Cotización' : 'Contacto';
-$asunto = $label . ' LMO INOX SPA · ' . ($empresa !== '' ? $empresa : $nombre);
-if (function_exists('mb_encode_mimeheader')) {
-  $asunto = mb_encode_mimeheader($asunto, 'UTF-8', 'B', "\r\n");
-}
+$asuntoRaw = $label . ' LMO INOX SPA · ' . ($empresa !== '' ? $empresa : $nombre);
+$asunto = function_exists('mb_encode_mimeheader')
+  ? mb_encode_mimeheader($asuntoRaw, 'UTF-8', 'B', "\r\n")
+  : $asuntoRaw;
 
 $cuerpo = implode("\n", [
   $label . ' desde lmoinox.cl',
@@ -104,12 +104,16 @@ $cuerpo = implode("\n", [
   'Enviado el ' . gmdate('Y-m-d H:i') . ' UTC',
 ]);
 
+$replyName = function_exists('mb_encode_mimeheader')
+  ? mb_encode_mimeheader($nombre, 'UTF-8', 'B', "\r\n")
+  : preg_replace('/[^\x20-\x7E]/', '', $nombre);
+
 $headers = [
   'MIME-Version: 1.0',
   'Content-Type: text/plain; charset=UTF-8',
   'Content-Transfer-Encoding: 8bit',
   'From: LMO INOX SPA <' . FROM . '>',
-  'Reply-To: ' . $nombre . ' <' . $email . '>',
+  'Reply-To: ' . $replyName . ' <' . $email . '>',
   'X-Mailer: LMO-INOX-Web',
 ];
 
