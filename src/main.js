@@ -1,4 +1,5 @@
 import { SITE, NAV } from './data/site.js'
+import { CATEGORIES } from './data/products.js'
 import { countQuote, quoteText } from './quote.js'
 import { bootMotion, countPunch, toastMotion } from './motion.js'
 import './styles/main.css'
@@ -42,18 +43,13 @@ function footer() {
         <div>
           <h3>Catálogo</h3>
           <ul>
-            <li><a href="productos.html?cat=flanges">Flanges</a></li>
-            <li><a href="productos.html?cat=fitting">Fitting</a></li>
-            <li><a href="productos.html?cat=valvulas">Válvulas</a></li>
-            <li><a href="productos.html?cat=duplex">Duplex / Súper Duplex</a></li>
-            <li><a href="productos.html?cat=hdpe">HDPE</a></li>
+            ${CATEGORIES.map((c) => `<li><a href="productos.html?cat=${c.id}">${c.name}</a></li>`).join('')}
           </ul>
         </div>
         <div>
           <h3>Menú</h3>
           <ul>
             <li><a href="index.html">Home</a></li>
-            <li><button type="button" class="linkish" data-back>Regresar</button></li>
             <li><a href="productos.html">Catálogo</a></li>
             <li><a href="empresa.html">Quiénes somos</a></li>
             <li><a href="contacto.html">Contacto</a></li>
